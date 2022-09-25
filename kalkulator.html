@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Kalkulator inflacije</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div class="background-overlay">
+
+		<h1>Kalkulator inflacije</h1>
+
+		<div class="container">
+			<h3>Stopa inflacije: <input type="number" min="0.1" id="inflationRate"> %</h3> <br>
+			<h3>Izračunaj koliko će <input type="number" min="1" id="money"> € da vrijedi za 
+				<input type="number" min="1" id="years"> godina?</h3>
+
+			<button onclick="inflationCalculator()">Izračunaj</button>
+		</div>
+
+	</div>
+<script>
+function inflationCalculator() {
+	let inflationRate = document.querySelector('#inflationRate');
+	let money = document.querySelector('#money');
+	inflationRate = parseFloat(inflationRate.value);
+	money = parseFloat(money.value);
+	
+	let years = document.querySelector('#years').value;
+	years = parseFloat(years);
+	
+	let worth = money + (money * (inflationRate / 100));
+	
+	for(let i = 1; i < years; i++) {
+		worth +=worth * (inflationRate / 100);
+		}
+	
+	let newElement = document.createElement('div');
+	newElement.className = 'new-value';
+	newElement.innerText  = `Danasnjih ${money}E vredi isto kao ${worth}E za ${years} godina.`;
+	
+	document.querySelector('.container').appendChild(newElement);
+	
+}
+
+
+
+
+
+
+</script>
+</body>
+</html>
